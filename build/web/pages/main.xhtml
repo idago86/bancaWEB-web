@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Banca Telacad</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!-- jQuery library -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Latest compiled JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <h:outputStylesheet library="css" name="sweetalert.css"/>
+        <h:outputScript library="js" name="sweetalert.min.js"/>
+    </h:head>
+
+    <h:body>
+        <!-- Main Container --> 
+        <div class="container-fluid">  
+            <!-- JumboTron --> 
+            <div class="jumbotron text-center">
+                <h1>Banca Telacad</h1> 
+                <p><h:form>                        
+                        <strong>Welcome Back <h:outputText value="#{userBean.logedPrivilege}" styleClass=" text-uppercase text-success"/> </strong>
+                    </h:form></p> 
+
+                <h:form>                    
+                    <p>
+                        <p:commandLink value="Deconectare"  action="#{userBean.logout()}" styleClass="small">
+                            <p:confirm header="LogOut Confirmation" message="Sigur vrei sa pleci?" icon="ui-icon-alert" />
+                        </p:commandLink>
+
+                    </p>                  
+
+                    <p:confirmDialog global="true" showEffect="fade" >
+                        <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"  />
+                    </p:confirmDialog>
+
+                </h:form>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-3 col-md-3 col-lg-3">
+                    <!-- NavBar vertical --> 
+                    <ul class="nav nav-pills nav-stacked">                        
+                        <li class="active"><a data-toggle="pill" href="#clientsOpt">Clients Options</a></li>
+                        <li><a data-toggle="pill" href="#accountsOpt">Accounts Options</a></li>
+                        <li><a data-toggle="pill" href="#transactions">Transactions</a></li>
+                    </ul>
+                </div>
+                <div class="col-sm-9 col-md-9 col-lg-9" >
+                    <!-- content --> 
+                    <div class="tab-content">                        
+                        <div id="clientsOpt" class="tab-pane fade in active">                            
+                            <ui:include src="clients.xhtml" />
+                        </div>
+                        <div id="accountsOpt" class="tab-pane fade">
+                            <ui:include src="accounts.xhtml" />                            
+                        </div>
+                        <div id="transactions" class="tab-pane fade">                            
+                            <ui:include src="transaction.xhtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <br/> <br/> <br/> <br/> 
+    </h:body>
+</html>
+
+
+

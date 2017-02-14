@@ -1,0 +1,90 @@
+<html xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"> 
+
+    <div class="container"> 
+
+        <div class="row">  
+            <div class="col-sm-9">
+
+                <h4>Add New Client</h4>
+                <h:form id="form-input" class="form-inline"> 
+                    
+                    <div class="form-group">     
+                        <p:inputText type="text" value="#{clientBean.nume}" class="form-control" id="nume"
+                                     placeholder="Numele" required="true" 
+                                     requiredMessage="Insert a Last Name"/>
+
+                    </div>
+                    <div class="form-group">     
+                        <p:inputText type="text" value="#{clientBean.prenume}" class="form-control" id="prenume"
+                                     placeholder="Prenumele" required="true"
+                                     requiredMessage="Insert a Firstname"/>
+
+                    </div>
+                    <div class="form-group">      
+                        <p:inputText type="text" value="#{clientBean.cnp}" class="form-control" 
+                                     id="cnp" placeholder="CNP Clientului" validator="validators.ValidatorCNP" 
+                                     required="true" requiredMessage="Insert client's CNP"/>
+
+                    </div>          
+                    <div class="form-group">
+                        <p:commandButton type="submit" class="btn btn-primary" value="Save" 
+                                         actionListener="#{clientBean.adaugaClient()}" 
+                                         update="nume, prenume, cnp, msjNume, msjPrenume, msjCNP, form-table:clientTable" />
+                    </div>  
+
+                    <!-- Input validates messages --> 
+                    <div class="form-inline">
+                        <div class="form-group">
+                            <p:message id="msjNume" for="nume"/>                  
+                        </div>  
+                        <div class="form-group">
+                            <p:message id="msjPrenume" for="prenume"/>                  
+                        </div> 
+                        <div class="form-group">                       
+                            <p:message id="msjCNP" for="cnp" showDetail="true" /> 
+                        </div> 
+                    </div>  
+                    <br/> 
+                </h:form> 
+
+                <h:form id="form-table">
+
+                    <p:dataTable id="clientTable" var="c" value="#{clientBean.allClienti}"
+                                 paginator="true" rows="9" rowHover="true"
+                                 rowKey="#{c.id}" style="text-align: center">
+
+
+                        <f:facet name="header">
+                            Actuals Clients
+                        </f:facet>                       
+                        <p:column headerText="ID" style="width: 10%">
+                            <h:outputText value="#{c.id}" />
+                        </p:column>
+                        <p:column headerText="NUME">
+                            <h:outputText value="#{c.nume}" />
+                        </p:column>
+                        <p:column headerText="PRENUME">
+                            <h:outputText value="#{c.prenume}" />
+                        </p:column>      
+                        <p:column headerText="CNP">
+                            <h:outputText value="#{c.cnp}" />
+                        </p:column>                          
+                        <p:column style="width: 15%">                           
+                            <p:commandLink value="Delete" actionListener="#{clientBean.removeClient(c.id)}" update="form-table:clientTable">
+                                <p:confirm header="Delete Confirmation" message="Sunteti sigur ca doriti sa stergeti acest client ?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div> 
+
+    </div>
+
+</html>
+

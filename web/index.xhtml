@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>BancaTelacad</title>       
+        <h:outputStylesheet library="css" name="idago.css"/> 
+        <h:outputStylesheet library="css" name="sweetalert.css"/>
+        <h:outputScript library="js" name="idago.js"/> 
+        <h:outputScript library="js" name="sweetalert.min.js"/>
+    </h:head>    
+
+    <h:body>         
+            <div class="login-page">
+            <div class="form">  
+                <h:form styleClass="login-form">
+                    <p:inputText placeholder="Username" value="#{userBean.username}" id="username" required="true" requiredMessage="Username is required"/>
+                    <p:inputText placeholder="Parola" type="password" value="#{userBean.parola}" id="parola" required="true" requiredMessage="Parola is required"/>
+                    <p:commandButton value="Login" styleClass="btn btn-small" action="#{userBean.loginCheck()}" update="username,parola"/>                    
+                </h:form>
+                
+                <h:form>
+                    <p class="message">Not registered? <p:commandLink value="Create an account" action="gotoRegister"/></p>                    
+                </h:form>
+            </div>
+        </div>        
+    </h:body>
+</html>
+

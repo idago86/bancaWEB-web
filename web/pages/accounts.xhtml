@@ -1,0 +1,86 @@
+<html xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <div class="container">
+        <h4>Attribute an account to an existant client</h4>
+
+        <h:form id="form-AccountInput" class="form-inline">  
+
+            <div class="form-group">     
+                <p:inputText type="text" value="#{contBean.clientID}" class="form-control" id="clientID"
+                             placeholder="Insert Client's ID" required="true" 
+                             requiredMessage="Insert the client's ID"/>
+
+            </div>
+
+            <div class="form-group">     
+                <p:inputText type="text" value="#{contBean.accountDescription}" class="form-control" id="descriere"
+                             placeholder="Account's Description)" required="true" 
+                             requiredMessage="Insert Account's Description"/>
+
+            </div>
+
+            <div class="form-group">
+                <p:commandButton type="submit" class="btn btn-primary" value="Save" 
+                                 actionListener="#{contBean.adaugaAccount()}" 
+                                 update="clientID, descriere, msjClientID, msjDescriere, form-ACCtable:accountTable" />
+            </div>  
+
+            <!-- Input validates messages --> 
+            <div class="form-inline">
+                <div class="form-group">
+                    <p:message id="msjClientID" for="clientID"/>                  
+                </div>  
+                <div class="form-group">                       
+                    <p:message id="msjDescriere" for="descriere" showDetail="true" /> 
+                </div> 
+            </div>  
+            <br/> 
+        </h:form> 
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <h:form id="form-ACCtable">
+                    <p:dataTable id="accountTable" var="acc" value="#{contBean.allAccounts}" rowHover="true" style="text-align: center">
+                        <p:column headerText="ID" style="width: 45px">
+                            <h:outputText value="#{acc.id}" />
+                        </p:column>
+
+                        <p:column headerText="IBAN">
+                            <h:outputText value="#{acc.iban}" />
+                        </p:column>
+
+                        <p:column headerText="DESCRIPTION">
+                            <h:outputText value="#{acc.descriere}" />
+                        </p:column>
+
+                        <p:column headerText="SOLD" style="width: 10%">
+                            <h:outputText value="#{acc.sold}" />
+                        </p:column>
+
+                        <p:column headerText="DATE" style="width: 23%">
+                            <h:outputText value="#{acc.creationDate}" />
+                        </p:column>
+
+                        <p:column headerText="HOLDER">
+                            <h:outputText value="#{acc.client.nume} #{acc.client.prenume}" />
+                        </p:column>                        
+                        <p:column style="width: 10%">                           
+                            <p:commandLink value="Delete" actionListener="#{contBean.removeCont(acc.id)}" update="form-ACCtable:accountTable">
+                            <p:confirm header="Delete Confirmation" message="Sunteti sigur ca doriti sa stergeti acest cont ?" icon="ui-icon-alert" />
+                            </p:commandLink>
+                        </p:column>
+
+                    </p:dataTable>
+
+                </h:form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+
+    </div>
+
+</html>
+

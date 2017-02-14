@@ -1,0 +1,77 @@
+<html xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <div class="container">
+        <h:form id="form-DepositInput" class="form-inline">  
+            <div class="form-group">     
+                <p:inputText type="text" value="#{userBean.contDeCreditatID}" class="form-control" id="contDeCreditatID"
+                             placeholder="ID Contului" required="true" 
+                             requiredMessage="Insert the account's ID"/>
+
+            </div>
+
+            <div class="form-group">     
+                <p:inputText type="text" value="#{userBean.suma}" class="form-control" id="suma"
+                             placeholder="Suma de DEPUS" required="true" 
+                             requiredMessage="Insert the amount"/>
+
+            </div>
+
+            <div class="form-group">
+                <p:commandButton type="submit" class="btn btn-primary" value="Save" 
+                                 actionListener="#{userBean.depunere()}" 
+                                 update="contDeCreditatID, suma, msjContDeCreditatID, msjSuma, form-ConturiTable:accountTab"/>
+            </div>  
+
+            <!-- Input validates messages --> 
+            <div class="form-inline">
+                <div class="form-group">
+                    <p:message id="msjContDeCreditatID" for="contDeCreditatID"/>                  
+                </div>  
+                <div class="form-group">                       
+                    <p:message id="msjSuma" for="suma" showDetail="true" /> 
+                </div> 
+            </div>  
+            <br/> 
+        </h:form> 
+
+        <div class="row">
+            <div class="col-sm-9">
+
+                <h:form id="form-ConturiTable">
+                    <p:dataTable id="accountTab" var="cont" value="#{contBean.allAccounts}" rowHover="true" style="text-align: center">
+                        <p:column headerText="ID" style="width: 45px">
+                            <h:outputText value="#{cont.id}" />
+                        </p:column>
+
+                        <p:column headerText="IBAN">
+                            <h:outputText value="#{cont.iban}" />
+                        </p:column>
+
+                        <p:column headerText="DESCRIPTION">
+                            <h:outputText value="#{cont.descriere}" />
+                        </p:column>
+
+                        <p:column headerText="SOLD" style="width: 12%">
+                            <h:outputText value="#{cont.sold}" />
+                        </p:column>
+
+                        <p:column headerText="DATE" style="width: 23%">
+                            <h:outputText value="#{cont.creationDate}" />
+                        </p:column>
+
+                        <p:column headerText="HOLDER" style="width: 28%">
+                            <h:outputText value="#{cont.client.nume} #{cont.client.prenume}" />
+                        </p:column>                        
+
+                    </p:dataTable>
+
+                </h:form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+
+    </div>
+
+</html>
+

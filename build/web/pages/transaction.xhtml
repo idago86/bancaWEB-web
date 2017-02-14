@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">    
+
+    <div class="container">           
+
+        <div class="row">
+            <div class="col-md-9">
+                <!-- NavBar Horizontal --> 
+                <ul class="nav nav-pills nav-justified">
+                    <li class="active"><a data-toggle="pill" href="#depunere">Depuneri</a></li>
+                    <li><a data-toggle="pill" href="#retragere">Retrageri</a></li>
+                    <li><a data-toggle="pill" href="#transfer">Transferi</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">                    
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12">
+
+                <!-- content --> 
+                <div class="tab-content active">
+                    <div id="depunere" class="tab-pane fade in active">                            
+                        <ui:include src="depunere.xhtml" />
+                    </div>
+                    <div id="retragere" class="tab-pane fade">                            
+                        <ui:include src="retragere.xhtml" />
+                    </div>
+                    <div id="transfer" class="tab-pane fade">
+                        <ui:include src="transfer.xhtml" />                            
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</html>
+
